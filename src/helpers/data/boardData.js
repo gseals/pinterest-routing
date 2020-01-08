@@ -28,9 +28,12 @@ const saveBoard = (boardInfo) => axios.post(`${baseUrl}/boards.json`, boardInfo)
 
 const updateBoard = (boardId, newBoardInfo) => axios.put(`${baseUrl}/boards/${boardId}.json`, newBoardInfo);
 
+const deleteBoard = (boardId) => axios.delete(`${baseUrl}/boards/${boardId}.json`);
+
 export default {
   getBoardsByUid,
   getSingleBoard,
   saveBoard,
   updateBoard,
+  deleteBoard,
 };
