@@ -12,7 +12,7 @@ class Board extends React.Component {
   render() {
     const { board } = this.props;
     return (
-      <div className="Board col-4">
+      <div className="Board col-4 mb-3">
         <div className="card">
           <div className="card-body">
           <h5 className="card-title">{board.name}</h5>
