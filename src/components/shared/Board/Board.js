@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 
+import { Link } from 'react-router-dom';
 import boardShape from '../../../helpers/propz/boardShape';
 
 import './Board.scss';
