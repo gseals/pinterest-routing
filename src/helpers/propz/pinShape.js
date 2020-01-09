@@ -8,4 +8,4 @@ const pinShape = PropTypes.shape({
   boardId: PropTypes.string.isRequired,
 });
 
-export default pinShape;
+export default { pinShape };
