@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './SingleBoard.scss';
 import boardData from '../../../helpers/data/boardData';
@@ -36,10 +37,12 @@ deletePin = (pinId) => {
 
 render() {
   const { board } = this.state;
+  const { boardId } = this.props.match.params;
   return (
     <div className="SingleBoard">
       <h1>{board.name}</h1>
       <p>{board.description}</p>
+      <Link className="btn btn-primary" to={`/board/${boardId}/pin/new`}>Add a pin</Link>
     <div className="pins d-flex flex-wrap">
       { this.state.pins.map((pin) => <Pin key={pin.id} pin={pin} deletePin={this.deletePin}/>)}
     </div>
