@@ -28,9 +28,12 @@ const deletePin = (pinId) => axios.delete(`${baseUrl}/pins/${pinId}.json`);
 
 const savePin = (newPin) => axios.post(`${baseUrl}/pins.json`, newPin);
 
+const editPinData = (pinId, editPin) => axios.put(`${baseUrl}/pins/${pinId}.json`, editPin);
+
 export default {
   getPinsByBoardId,
   getSinglePin,
   deletePin,
   savePin,
+  editPinData,
 };

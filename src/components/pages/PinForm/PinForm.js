@@ -11,6 +11,18 @@ class PinForm extends React.Component {
     pinTitle: '',
   }
 
+  componentDidMount() {
+    const { pinId } = this.props.match.params;
+    if (pinId) {
+      pinData.getSinglePin(pinId)
+        .then((request) => {
+          const pin = request.data;
+          this.setState({ pinTitle: pin.title, pinImage: pin.imageUrl });
+        })
+        .catch((err) => console.error('error with get single pin', err));
+    }
+  }
+
   pinUrlChange = (e) => {
     e.preventDefault();
     this.setState({ pinImage: e.target.value });
@@ -35,8 +47,23 @@ class PinForm extends React.Component {
       .catch((err) => console.error('error from save pin', err));
   }
 
+  editPinEvent = (e) => {
+    e.preventDefault();
+    const { boardId, pinId } = this.props.match.params;
+    const editPin = {
+      imageUrl: this.state.pinImage,
+      title: this.state.pinTitle,
+      uid: authData.getUid(),
+      boardId,
+    };
+    pinData.editPinData(pinId, editPin)
+      .then(() => this.props.history.push(`/board/${boardId}`))
+      .catch((err) => console.error('error from save pin', err));
+  }
+
   render() {
     const { pinImage, pinTitle } = this.state;
+    const { pinId } = this.props.match.params;
 
     return (
       <form className="PinForm">
@@ -62,7 +89,10 @@ class PinForm extends React.Component {
           onChange={this.pinTitleChange}
           />
         </div>
-        <button className="btn btn-secondary" onClick={this.savePinEvent}>Save Pin</button>
+        { pinId
+          ? <button className="btn btn-secondary" onClick={this.editPinEvent}>Edit Pin</button>
+          : <button className="btn btn-secondary" onClick={this.savePinEvent}>Save Pin</button>
+        }
       </form>
     );
   }
