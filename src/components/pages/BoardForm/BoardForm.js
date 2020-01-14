@@ -11,6 +11,17 @@ class BoardForm extends React.Component {
   }
   // these are "how many inputs do we need"
 
+  componentDidMount() {
+    const { boardId } = this.props.match.params;
+    if (boardId) {
+      boardData.getSingleBoard(boardId)
+        .then((response) => {
+          this.setState({ boardName: response.data.name, boardDescription: response.data.description }); // set the state to the object of the board that comes back
+        })
+        .catch((err) => console.error('error in get single board', err));
+    }
+  }
+
   nameChange = (e) => {
     e.preventDefault();
     this.setState({ boardName: e.target.value });
